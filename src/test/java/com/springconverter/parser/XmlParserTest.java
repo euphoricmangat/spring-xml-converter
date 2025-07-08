@@ -235,8 +235,16 @@ class XmlParserTest {
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
         
-        List<SpringBean> beans = parser.parseXmlFile(xmlFile.toString());
+        // The parser should return an empty list for non-Spring XML
+        List<SpringBean> beans = null;
+        try {
+            beans = parser.parseXmlFile(xmlFile.toString());
+        } catch (XmlParsingException e) {
+            fail("Parser should handle non-Spring XML gracefully: " + e.getMessage());
+        }
         
+        // Verify that we get an empty list (no Spring beans found)
+        assertNotNull(beans);
         assertEquals(0, beans.size());
     }
 
