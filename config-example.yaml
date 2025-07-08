@@ -1,0 +1,27 @@
+# Spring XML to Annotation Converter Configuration Example
+# Copy this file and modify as needed for your project
+
+# Backup settings
+backupDirectory: ./backup
+createBackups: true
+
+# Execution mode
+dryRun: false
+verbose: true
+
+# File processing
+removeEmptyXmlFiles: true
+addTODOsForAmbiguousCases: true
+
+# Reporting
+reportFormat: markdown
+reportOutputPath: ./conversion_report.md
+
+# File filtering (optional)
+# excludePatterns:
+#   - ".*test.*"
+#   - ".*Test.*"
+
+# includePatterns:
+#   - ".*applicationContext.*"
+#   - ".*spring.*\\.xml" 
