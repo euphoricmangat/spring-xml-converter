@@ -5,6 +5,7 @@ import com.springconverter.file.FileManager;
 import com.springconverter.java.JavaSourceModifier;
 import com.springconverter.model.*;
 import com.springconverter.parser.XmlParser;
+import com.springconverter.parser.XmlParser.XmlParsingException;
 import com.springconverter.report.ReportGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -150,7 +151,7 @@ public class ConversionEngine {
             // Remove empty XML file if configured
             fileManager.removeEmptyXmlFile(xmlFilePath);
             
-        } catch (XmlParser.XmlParsingException e) {
+        } catch (XmlParsingException e) {
             logger.error("Failed to parse XML file: {}", xmlFilePath, e);
             report.addError(new ConversionError("XML parsing error: " + e.getMessage(), 
                     xmlFilePath, ConversionError.ErrorType.XML_PARSING_ERROR));

@@ -1,6 +1,7 @@
 package com.springconverter.parser;
 
 import com.springconverter.model.SpringBean;
+import com.springconverter.parser.XmlParser.XmlParsingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -25,7 +26,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseSimpleBean() throws IOException, XmlParser.XmlParsingException {
+    void testParseSimpleBean() throws IOException, XmlParsingException {
         // Create a simple XML file
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
@@ -50,7 +51,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseBeanWithProperties() throws IOException, XmlParser.XmlParsingException {
+    void testParseBeanWithProperties() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -85,7 +86,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseBeanWithConstructorArgs() throws IOException, XmlParser.XmlParsingException {
+    void testParseBeanWithConstructorArgs() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -118,7 +119,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseComponentScan() throws IOException, XmlParser.XmlParsingException {
+    void testParseComponentScan() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:context=\"http://www.springframework.org/schema/context\"\n" +
@@ -147,7 +148,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseImport() throws IOException, XmlParser.XmlParsingException {
+    void testParseImport() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -173,7 +174,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseMultipleBeans() throws IOException, XmlParser.XmlParsingException {
+    void testParseMultipleBeans() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -200,7 +201,7 @@ class XmlParserTest {
     }
 
     @Test
-    void testParseBeanWithAttributes() throws IOException, XmlParser.XmlParsingException {
+    void testParseBeanWithAttributes() throws IOException, XmlParsingException {
         String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -246,9 +247,9 @@ class XmlParserTest {
         Path xmlFile = tempDir.resolve("invalid.xml");
         try {
             Files.write(xmlFile, invalidXml.getBytes());
-            assertThrows(XmlParser.XmlParsingException.class, () -> {
-                parser.parseXmlFile(xmlFile.toString());
-            });
+                    assertThrows(XmlParsingException.class, () -> {
+            parser.parseXmlFile(xmlFile.toString());
+        });
         } catch (IOException e) {
             fail("Failed to write test file");
         }
