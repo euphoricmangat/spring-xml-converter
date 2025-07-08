@@ -89,10 +89,8 @@ public class JavaSourceModifier {
         }
         
         // Extract simple class name from full class name
-        String simpleClassName = className;
-        if (className.contains(".")) {
-            simpleClassName = className.substring(className.lastIndexOf('.') + 1);
-        }
+        final String simpleClassName = className.contains(".") ? 
+                className.substring(className.lastIndexOf('.') + 1) : className;
         
         return cu.findFirst(ClassOrInterfaceDeclaration.class, 
                 classDecl -> classDecl.getNameAsString().equals(simpleClassName));
@@ -143,10 +141,8 @@ public class JavaSourceModifier {
             return "@Component";
         }
         
-        String simpleClassName = className;
-        if (className.contains(".")) {
-            simpleClassName = className.substring(className.lastIndexOf('.') + 1);
-        }
+        final String simpleClassName = className.contains(".") ? 
+                className.substring(className.lastIndexOf('.') + 1) : className;
         
         // Determine annotation based on class name patterns
         String lowerClassName = simpleClassName.toLowerCase();
@@ -201,7 +197,7 @@ public class JavaSourceModifier {
         if (!bean.getConstructorArgs().isEmpty()) {
             // Find constructor with matching number of parameters
             Optional<MethodDeclaration> constructorOpt = classDecl.getMethods().stream()
-                    .filter(method -> method.isConstructor() && 
+                    .filter(method -> method.getNameAsString().equals(classDecl.getNameAsString()) && 
                             method.getParameters().size() == bean.getConstructorArgs().size())
                     .findFirst();
             
@@ -301,10 +297,8 @@ public class JavaSourceModifier {
             return javaFiles;
         }
         
-        String simpleClassName = className;
-        if (className.contains(".")) {
-            simpleClassName = className.substring(className.lastIndexOf('.') + 1);
-        }
+        final String simpleClassName = className.contains(".") ? 
+                className.substring(className.lastIndexOf('.') + 1) : className;
         
         try {
             Files.walk(Path.of(projectDirectory))
