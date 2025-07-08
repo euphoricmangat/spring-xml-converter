@@ -27,17 +27,15 @@ class XmlParserTest {
     @Test
     void testParseSimpleBean() throws IOException, XmlParser.XmlParsingException {
         // Create a simple XML file
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <bean id="userService" class="com.example.service.UserServiceImpl"/>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <bean id=\"userService\" class=\"com.example.service.UserServiceImpl\"/>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -53,20 +51,18 @@ class XmlParserTest {
 
     @Test
     void testParseBeanWithProperties() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <bean id="userService" class="com.example.service.UserServiceImpl">
-                    <property name="userDao" ref="userDao"/>
-                    <property name="maxUsers" value="100"/>
-                </bean>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <bean id=\"userService\" class=\"com.example.service.UserServiceImpl\">\n" +
+                "        <property name=\"userDao\" ref=\"userDao\"/>\n" +
+                "        <property name=\"maxUsers\" value=\"100\"/>\n" +
+                "    </bean>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -90,20 +86,18 @@ class XmlParserTest {
 
     @Test
     void testParseBeanWithConstructorArgs() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <bean id="userService" class="com.example.service.UserServiceImpl">
-                    <constructor-arg ref="userDao"/>
-                    <constructor-arg value="100"/>
-                </bean>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <bean id=\"userService\" class=\"com.example.service.UserServiceImpl\">\n" +
+                "        <constructor-arg ref=\"userDao\"/>\n" +
+                "        <constructor-arg value=\"100\"/>\n" +
+                "    </bean>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -125,20 +119,18 @@ class XmlParserTest {
 
     @Test
     void testParseComponentScan() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:context="http://www.springframework.org/schema/context"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd
-                   http://www.springframework.org/schema/context
-                   http://www.springframework.org/schema/context/spring-context.xsd">
-                
-                <context:component-scan base-package="com.example"/>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:context=\"http://www.springframework.org/schema/context\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\n" +
+                "       http://www.springframework.org/schema/context\n" +
+                "       http://www.springframework.org/schema/context/spring-context.xsd\">\n" +
+                "    \n" +
+                "    <context:component-scan base-package=\"com.example\"/>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -156,17 +148,15 @@ class XmlParserTest {
 
     @Test
     void testParseImport() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <import resource="applicationContext-security.xml"/>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <import resource=\"applicationContext-security.xml\"/>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -184,19 +174,17 @@ class XmlParserTest {
 
     @Test
     void testParseMultipleBeans() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <bean id="userService" class="com.example.service.UserServiceImpl"/>
-                <bean id="userDao" class="com.example.dao.UserDaoImpl"/>
-                <bean id="emailService" class="com.example.service.EmailServiceImpl"/>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <bean id=\"userService\" class=\"com.example.service.UserServiceImpl\"/>\n" +
+                "    <bean id=\"userDao\" class=\"com.example.dao.UserDaoImpl\"/>\n" +
+                "    <bean id=\"emailService\" class=\"com.example.service.EmailServiceImpl\"/>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -213,18 +201,16 @@ class XmlParserTest {
 
     @Test
     void testParseBeanWithAttributes() throws IOException, XmlParser.XmlParsingException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <beans xmlns="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                   http://www.springframework.org/schema/beans/spring-beans.xsd">
-                
-                <bean id="userService" class="com.example.service.UserServiceImpl" 
-                      scope="prototype" lazy-init="true" primary="true"/>
-                
-            </beans>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
+                "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n" +
+                "       http://www.springframework.org/schema/beans/spring-beans.xsd\">\n" +
+                "    \n" +
+                "    <bean id=\"userService\" class=\"com.example.service.UserServiceImpl\" \n" +
+                "          scope=\"prototype\" lazy-init=\"true\" primary=\"true\"/>\n" +
+                "    \n" +
+                "</beans>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
@@ -240,12 +226,10 @@ class XmlParserTest {
 
     @Test
     void testParseNonSpringXml() throws IOException {
-        String xmlContent = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <configuration>
-                <property name="test" value="value"/>
-            </configuration>
-            """;
+        String xmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<configuration>\n" +
+                "    <property name=\"test\" value=\"value\"/>\n" +
+                "</configuration>";
         
         Path xmlFile = tempDir.resolve("test.xml");
         Files.write(xmlFile, xmlContent.getBytes());
